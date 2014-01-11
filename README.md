@@ -59,3 +59,13 @@ If, while the app is running, you add new subdomains to couch, there is a way to
 You just need to make a request (any method will do) to `http://refresh.YOURDOMAIN?token=TOKEN`
 
 For example, if I have the domains my-site.com and example.com, I could do a GET request to either `refresh.example.com?token=TOKEN` or `refresh.my-site.com?token=TOKEN` where TOKEN is the token I set in step 1
+
+4. Forward port in linux
+
+If you don't want to run on port 80 you can use `iptables` to forward the port. 
+
+To see current forwards use `sudo iptables -t nat -L`,
+
+To add a forward use `sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000` where 80 is being forwarded to 3000.
+
+To clear all use `sudo iptables -t nat -F`.
